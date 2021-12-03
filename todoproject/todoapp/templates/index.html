@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Todo application </title>
+        <meta charset = "UTF-8">
+        <link rel="stylesheet" href="{% static "style.css " %}">
+    </head>
+    <body>
+        <h1>Welcome to your to-do list!</h1>
+
+        <p title = "this is just a placeholder for future introduction text!">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi 
+            ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
+            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+            deserunt mollit anim id est laborum."
+        </p>
+        <h2>What would you like me to keep track of?</h2>
+        <form action="/addTodoItem/" method = "post">{% csrf_token %}
+            <input type="text" name="content">
+            <input type="submit" value="submit">
+        </form> 
+        <h3>Recent Tasks:</h3>
+        <ul>
+            {% for i in all_items %} 
+            <li>{{i.content}}
+                <form action="/deleteTodoItem/{{i.id}}/" method = "post">{% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>  
+            </li>
+            {% endfor %}
+        </ul> 
+    </body>
+</html>
